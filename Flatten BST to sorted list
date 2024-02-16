@@ -1,0 +1,29 @@
+class Solution
+{
+public:
+    void inorder(Node* root,vector<int>& v)
+    {
+        if(root){
+            inorder(root->left,v);
+            v.push_back(root->data);
+            inorder(root->right,v);
+        }
+    }
+    Node* vec_to_list(vector<int>& v)
+    {
+        Node* head=new Node(v[0]);
+        Node* rear=head;
+        for(int i=1;i<v.size();i++){
+            Node* temp=new Node(v[i]);
+            rear->right=temp;
+            rear=temp;
+        }
+        return head;
+    }
+    Node *flattenBST(Node *root)
+    {
+        vector<int> v;
+        inorder(root,v);
+        return vec_to_list(v);
+    }
+};
